@@ -1,0 +1,4 @@
+<h3>Student List</h3>
+<div *ngFor="let stud of studList">
+    <a [routerLink]='["/student-details",stud.id]'>{{stud.firstName}}</a>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <p>Boomblacklt</p>
+        {{firstForm.value | json}}
+        <br>
+<br>
+        <div *ngIf="firstForm.submitted">
+            Mandingo {{studentDB | json}}
+        </div>
+        
+        <form method="POST" #firstForm="ngForm" (ngSubmit)="onSubmit(firstForm)">
+            <div>
+                <label for="id" class="control-label" [class.text-danger]="!idVal.valid">Student ID:</label>
+                <input type="text" name="id" #idVal="ngModel" [(ngModel)]="student.id" class="form-control" required />
+                <div *ngIf="idVal.errors?.required">
+                    <span class="text-danger">
+                        Student ID is required
+                    </span>
+                </div>
+            </div>
+
+            <div ngModelGroup="fullName">
+                <div>
+                    <input type="text" name="firstname" #fnVal="ngModel" [(ngModel)]="student.firstName" required />
+                </div>
+                <div>
+                    <input type="text" name="lastname" #lnVal="ngModel" [(ngModel)]="student.lastName" required />
+                </div>
+            </div>
+            <div>
+                <input type="email" name="email" [(ngModel)]="student.email" />
+            </div>
+            <div>
+                <select name="city" [(ngModel)]="student.city">
+                    <option value="">Select a City</option>
+                    <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                </select>
+            </div>
+            <div>
+                <input type="radio" name="gender" value="male" [(ngModel)]="student.gender" />
+                <input type="radio" name="gender" value="female" [(ngModel)]="student.gender" />
+                <input type="radio" name="gender" value="other" [(ngModel)]="student.gender" />
+            </div>
+
+            <input type="submit" name="save" value="save" />
+        </form>
+    </div>
+</div>
